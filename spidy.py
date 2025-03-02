@@ -9,10 +9,6 @@ import glob
 from colorama import Fore
 from queue import Queue
 
-colorama.init()  # Optional but good practice
-
-
-
 # Function for typewriting effect
 def type_writer(text, color, delay=0.5):
     sys.stdout.write(f"{color}{text}\n{Fore.RESET}")
