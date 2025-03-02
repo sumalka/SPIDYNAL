@@ -1,4 +1,4 @@
-('C:\\Users\\Moham\\OneDrive\\Documents\\GitHub\\SPIDY-X-SYSTEM-\\build\\spidy\\PYZ-00.pyz',
+('E:\\SPIDY BROZ SYSTEM™ V1.0\\build\\spidy\\PYZ-00.pyz',
  [('__future__', 'C:\\Python312\\Lib\\__future__.py', 'PYMODULE'),
   ('_aix_support', 'C:\\Python312\\Lib\\_aix_support.py', 'PYMODULE'),
   ('_compat_pickle', 'C:\\Python312\\Lib\\_compat_pickle.py', 'PYMODULE'),

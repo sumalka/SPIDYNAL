@@ -6,131 +6,13 @@ from colorama import init, Fore
 import random
 import threading
 import glob
+from queue import Queue
 from colorama import Fore
 from queue import Queue
+from threading import Lock
 
-# Function for typewriting effect
-def type_writer(text, color, delay=0.5):
-    sys.stdout.write(f"{color}{text}\n{Fore.RESET}")
-    sys.stdout.flush()
+import subprocess
 
-# Function for loading animation with percentage and drive info
-def loading_animation(total, current, lock, progress_queue, current_drive):
-    animation = "|/-\\"
-    idx = 0
-    while current < total:
-        try:
-            current = progress_queue.get(timeout=0.1)  # Update from the queue with a timeout
-        except:
-            pass  # If no update, continue
-        percentage = (current / total) * 100
-        sys.stdout.write(f"\r{Fore.YELLOW}Searching on {current_drive}... {animation[idx % 4]}  {percentage:.2f}%")
-        sys.stdout.flush()
-        time.sleep(0.1)
-        idx += 1
-
-# Function to search for files and folders in each drive
-def spidy_lens_search_drive(query, drive, extensions, found_items, current_item, total_items, lock, progress_queue):
-    for ext in extensions:
-        search_pattern = f"{drive}**/*{ext}"
-        files = glob.glob(search_pattern, recursive=True)
-        for file in files:
-            if query.lower() in file.lower():
-                found_items.append(file)
-            with lock:
-                current_item += 1
-                progress_queue.put(current_item)
-        with lock:
-            total_items += len(files)
-
-    search_pattern_folders = f"{drive}**/{query}*/"
-    folders = glob.glob(search_pattern_folders, recursive=True)
-    for folder in folders:
-        found_items.append(folder)
-        with lock:
-            current_item += 1
-            progress_queue.put(current_item)
-    with lock:
-        total_items += len(folders)
-
-# Function to search for files and folders
-def spidy_lens_search(query):
-    extensions = [
-        '.pdf', '.docx', '.doc', '.odt', '.txt', '.rtf', '.epub', '.md', '.html', '.xml', '.pptx', '.ppt', '.xlsx', '.xls', '.csv', '.tex', '.json', 
-        '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.ico', '.svg', '.webp', '.raw', '.heif', '.heic', 
-        '.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a', '.wma', '.alac', '.opus', 
-        '.mp4', '.avi', '.mkv', '.mov', '.wmv', '.flv', '.webm', '.mpg', '.mpeg', '.3gp', '.mts', '.vob', '.iso', 
-        '.zip', '.tar', '.gz', '.rar', '.7z', '.xz', '.bz2', '.tar.gz', '.tar.bz2', '.tgz', 
-        '.exe', '.bat', '.sh', '.cmd', '.msi', '.apk', '.app', '.dmg', '.jar', '.run', '.bin', 
-        '.py', '.java', '.cpp', '.c', '.js', '.html', '.css', '.php', '.rb', '.swift', '.go', '.pl', '.ts', '.json', '.scala', '.lua', '.sh', 
-        '.ttf', '.otf', '.woff', '.woff2', '.eot', '.svg', 
-        '.db', '.sql', '.sqlite', '.mdb', '.accdb', '.json', '.xml', 
-        '.dll', '.sys', '.ini', '.bak', '.log', '.dat', '.bin', 
-        '.iso', '.dmg', '.vmdk', '.vdi', '.bak', '.backup', 
-        '.vmdk', '.vhd', '.vdi', '.iso', '.ovf', 
-        '.torrent', '.chm', '.md', '.xml', '.yml', '.json', '.ini', '.bak', '.log', '.dat', '.bin', '.apk', '.srt', 
-        '.m4v', '.rmvb', '.mov', '.mpeg', '.mpg', '.ts', '.vob', '.m3u', '.cue'
-    ]
-
-    drives = ['C:\\', 'D:\\', 'E:\\']  # Adjust according to your system
-    found_items = []
-    total_items = 0  # Track total items to be searched
-    current_item = 0  # Track the current item being processed
-
-    lock = threading.Lock()  # Lock for thread-safe access
-    progress_queue = Queue()  # Queue to update progress
-
-    threads = []
-
-    # Start a thread for each drive to search in parallel
-    for drive in drives:
-        thread = threading.Thread(target=spidy_lens_search_drive, args=(query, drive, extensions, found_items, current_item, total_items, lock, progress_queue))
-        threads.append(thread)
-        thread.start()
-
-    # Start loading animation with percentage and drive info in a separate thread
-    loading_thread = threading.Thread(target=loading_animation, args=(total_items, current_item, lock, progress_queue, drives[0]))  # Default to 'C:'
-    loading_thread.daemon = True
-    loading_thread.start()
-
-    # Wait for all threads to complete
-    for thread in threads:
-        thread.join()
-
-    return found_items, total_items, current_item
-
-def spidy_lens():
-    type_writer("Welcome to SPIDY LENS! You can search for files by name with extensions (.pdf, .docx, etc.). Please note that this process may take some time as it involves searching and analyzing the system. Type 'close lens' to exit the lens.", Fore.GREEN)
-
-    while True:
-        # Change color for user input
-        query = input(f"{Fore.CYAN}Enter the file name or keyword to search (minimum 2 characters, or type 'close lens' to exit): {Fore.RESET}")
-
-        if query.lower() == "close lens":
-            type_writer("Closing SPIDY LENS.", Fore.RED)
-            break  # Exit the loop and close the program
-
-        # Ensure the input is at least 2 characters long
-        if len(query) < 2:
-            type_writer("Please enter at least 2 characters for the search query.", Fore.RED)
-            continue  # Ask for input again without exiting
-
-        # Start searching and loading in a separate thread
-        type_writer(f"Searching for '{query}'...", Fore.YELLOW)
-
-        found_items, total_items, current_item = spidy_lens_search(query)
-
-        # After search is completed, stop the loading animation by clearing the line
-        sys.stdout.write("\r                                      \r")
-
-        # Display results
-        if found_items:
-            type_writer(f"Found {len(found_items)} items related to '{query}':", Fore.GREEN)
-            for result in found_items:
-                print(result)
-        else:
-            type_writer(f"No results found for '{query}'.", Fore.RED)
-        
 # Initialize pygame mixer
 pygame.mixer.init()
 
@@ -248,15 +130,15 @@ print("\n")
 linux_loader_animation()
 
 # Update the paths to include the full path to the files
-sound_path = r"E:\SPIDY BROZ SYSTEM™ V1.0\\"
-spidy_sound = os.path.join(sound_path, "assets/spidy_sound.mp3")
-wake_up_spidy = os.path.join(sound_path, "assets/ake_up_spidy.mp3")
-start = os.path.join(sound_path, "assets/start.mp3")
-middle = os.path.join(sound_path, "assets/middle.mp3")
-dady_home = os.path.join(sound_path, "assets/dady_home.mp3")
-spidy_online = os.path.join(sound_path, "assets/spidy_online.mp3")
-hacker_mode = os.path.join(sound_path, "assets/hacker_mode.mp3")
-voice_mode = os.path.join(sound_path, "assets/voice_mode.mp3")
+sound_path = r"E:\SPIDY BROZ SYSTEM™ V1.0\assets\\"
+spidy_sound = os.path.join(sound_path, "spidy_sound.mp3")
+wake_up_spidy = os.path.join(sound_path, "wake_up_spidy.mp3")
+start = os.path.join(sound_path, "start.mp3")
+middle = os.path.join(sound_path, "middle.mp3")
+dady_home = os.path.join(sound_path, "dady_home.mp3")
+spidy_online = os.path.join(sound_path, "spidy_online.mp3")
+hacker_mode = os.path.join(sound_path, "hacker_mode.mp3")
+voice_mode = os.path.join(sound_path, "voice_mode.mp3")
 
 # Function to simulate typing effect
 def type_writer(text, color=Fore.GREEN, delay=0.02, end_line=True):
@@ -517,9 +399,13 @@ while True:
         # Display a random Spidy quote
         type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
 
+
     elif command.lower() == "spidy lens":
-        spidy_lens()  # Call the spidy_lens function when the user enters this command
-        
+        subprocess.run(["python", "spidyLens.py"])  # This will run the specified Python file
+
+    elif command.lower() == "spidy lens global":
+        subprocess.run(["python", "spidyLensGlobal.py"])  # This will run the specified Python file
+
     elif command.lower() == "exit":
         exit_sequence()
         break  # Exit the loop after the exit sequence is completed
