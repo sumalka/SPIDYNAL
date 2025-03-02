@@ -6,15 +6,10 @@ Welcome to **SPIDY BROZ SYSTEM™ ** - your friendly neighborhood intelligent se
 SPIDY BROZ SYSTEM™  is an advanced file search assistant that can search files and folders across your system using multithreading and unique animations. It is designed to provide quick search results while delivering a stylish, hacker-themed experience with sound effects and custom branding.
 
 ### Features:
-- Multithreaded File Search
-- Custom Loading Animations
-- Real-Time Percentage Progress Bar
-- Wide Range of File Extensions Supported
-- Linux-Style Loader Animation
-- Spidy ASCII Art Branding
 - Interactive Search System
-- Audio Sound Effects
-- Random Spidy Quotes
+- (under constraction)
+
+
 
 ## Installation
 1. Clone this repository:
