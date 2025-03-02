@@ -1,0 +1,1 @@
+pyinstaller --onefile --icon=spidy.ico spidy.py
