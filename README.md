@@ -1,58 +1,76 @@
-# SPIDY LENS™ SYSTEM
+# SPIDY X SYSTEM™ V1.0
 
-SPIDY LENS™ SYSTEM is an advanced desktop application developed using **Java Swing (JPanel)** with **MS SQL Database** for **City Nursing Home**. This system manages patient records, appointments, doctor information, and hospital staff management.
+Welcome to **SPIDY BROZ SYSTEM™ V1.0** - your friendly neighborhood intelligent search assistant powered by Python.
 
-## Features
-- Patient Registration & Management
-- Doctor Management
-- Appointments Scheduling
-- Bill Generation
-- User Authentication
-- Dashboard with Overview Statistics
-- Search & Filter Records
+## Description
+SPIDY BROZ SYSTEM™ V1.0 is an advanced file search assistant that can search files and folders across your system using multithreading and unique animations. It is designed to provide quick search results while delivering a stylish, hacker-themed experience with sound effects and custom branding.
 
-## Technologies Used
-- Java (NetBeans IDE)
-- Swing (JPanel for GUI)
-- MS SQL Database
-- JDBC Connectivity
+### Features:
+- Multithreaded File Search
+- Custom Loading Animations
+- Real-Time Percentage Progress Bar
+- Wide Range of File Extensions Supported
+- Linux-Style Loader Animation
+- Spidy ASCII Art Branding
+- Interactive Search System
+- Audio Sound Effects
+- Random Spidy Quotes
 
-## Setup Instructions
+## Installation
 1. Clone this repository:
 ```bash
-https://github.com/SPIDYBROZ/spidy-lens-system.git
+https://github.com/SPIDYBROZ/SPIDY_BROZ_SYSTEM.git
+```
+2. Install the required dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-2. Import the project into **NetBeans IDE**.
+### Dependencies:
+- Python 3.x
+- Pygame
+- Colorama
+- Termcolor
+- Glob
 
-3. Configure Database:
-   - Install MS SQL Server.
-   - Create a database named `spidy_lens_db`.
-   - Import the `spidy_lens_db.sql` file into the database.
+## How to Use
+1. Run the main script:
+```bash
+python spidy_lens.py
+```
+2. Follow the on-screen instructions.
+3. Type the file name or keyword you want to search.
+4. To exit, type `close lens`.
 
-4. Update Database Credentials in `DBConnection.java`:
-```java
-String url = "jdbc:sqlserver://localhost:1433;databaseName=spidy_lens_db";
-String username = "your_username";
-String password = "your_password";
+### Commands:
+| Command       | Description               |
+|--------------|---------------------------|
+| `close lens` | Exit the SPIDY LENS      |
+| `keyword`    | Search for files         |
+
+## Folder Structure
+```
+SPIDY BROZ SYSTEM
+│
+├── assets/               # Audio files and other assets
+├── spidy_lens.py        # Main Program File
+└── README.md            # Documentation
 ```
 
-5. Build & Run the Project.
+## Quotes by SPIDY 🕷️
+- "With great power comes great responsibility!"
+- "I’m always watching... 😏"
+- "Spidy is always ready for action! 🔥"
 
-## Screenshots
-| Feature | Screenshot |
-|---------|------------|
-| Login Page | ![Login](screenshots/login.png) |
-| Dashboard | ![Dashboard](screenshots/dashboard.png) |
-| Patient Management | ![Patient](screenshots/patient.png) |
+## Credits
+Developed by **SPIDY BRO** 🔥
 
-## Developer
-**SPIDY BROZ™** 🚀
+### Version
+**1.0**
 
-### Contact Us
-- Instagram: [@spidy_broz](https://www.instagram.com/spidy_broz)
-- YouTube: [SPIDY BROZ](https://www.youtube.com/@SPIDYBROZ)
-- Email: spidybrozofficial@gmail.com
+## License
+This project is licensed under the MIT License.
 
 ---
-🕸️ _"SPIDY LENS™ SYSTEM - Vision Beyond Limits"_
+### Daddy is Home Wake Up SPIDY™ 🕷️
+
