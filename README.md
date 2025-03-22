@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ## How to Use
 1. Run the Application By the SPIDYNAL.EXE:
 2. Follow the on-screen instructions.
-3. Type spidy lens to activate the lens
+3. Type `spidy lens` to activate the lens
 4. Type the file name or keyword you want to search.
 5. To exit, type `close lens`.
 
