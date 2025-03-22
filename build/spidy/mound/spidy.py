@@ -432,7 +432,7 @@ while True:
             type_writer("what's fuck huh?", Fore.GREEN)
             
     elif command.lower() == "fuck you":
-            type_writer("fuck you bitch, mother fucker..! 🖕🏻", Fore.GREEN)
+            type_writer("fuck you bitch.., you mother fucker..! 🖕🏻", Fore.GREEN)
 
     elif command.lower() == "help":
             type_writer("Commands here: hey, spidy lens, spidy hacks, whats today, exit, help", Fore.GREEN)
