@@ -12,14 +12,11 @@ SPIDYNAL SYSTEM™   is an advanced file search assistant that can search files 
 
 
 ## Installation
-1. Clone this repository:
+Clone this repository:
 ```bash
 https://github.com/maiz-an/SPIDYNAL-SYSTEM.git
 ```
-2. Run the Application:
-```bash
-pip install -r requirements.txt
-```
+
 
 ### Dependencies:
 - Python 3.x
