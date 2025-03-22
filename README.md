@@ -5,6 +5,8 @@ Welcome to **SPIDYNAL SYSTEM™** - your friendly neighborhood intelligent searc
 ## Description
 SPIDYNAL SYSTEM™   is an advanced file search assistant that can search files and folders across your system using multithreading and unique animations. It is designed to provide quick search results while delivering a stylish, hacker-themed experience with sound effects and custom branding.
 
+**Version: 1.3**
+
 ### Features:
 - Interactive Search System
 - (under constraction)
@@ -31,14 +33,6 @@ https://github.com/maiz-an/SPIDYNAL-SYSTEM.git
 3. Type `spidy lens` to activate the lens
 4. Type the file name or keyword you want to search.
 5. To exit, type `close lens`.
-
-### Version
-**1.3**
-
-## License
-This project is licensed under the MIT License.
-
----
 
 # We Are Looking for Python Developers!
 
