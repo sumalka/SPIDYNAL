@@ -13,6 +13,13 @@ from threading import Lock
 
 import subprocess
 
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and PyInstaller."""
+    if hasattr(sys, '_MEIPASS'):
+        # PyInstaller creates a temp folder and stores files there
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 # Initialize pygame mixer
 pygame.mixer.init()
 
@@ -129,8 +136,8 @@ print_spidy_art()
 print("\n")
 linux_loader_animation()
 
-# Update the paths to include the full path to the files
-sound_path = r"E:\SPIDY BROZ SYSTEM™ V1.0\assets\\"
+# Update the sound file paths
+sound_path = resource_path("assets")
 spidy_sound = os.path.join(sound_path, "spidy_sound.mp3")
 wake_up_spidy = os.path.join(sound_path, "wake_up_spidy.mp3")
 start = os.path.join(sound_path, "start.mp3")
@@ -372,7 +379,7 @@ while True:
     import threading
 
 # Assuming you are in the main command loop
-    if command.lower() == "spidy":
+    if command.lower() == "hey":
         # Start both the sound and the typewriter effect concurrently using threads
         thread1 = threading.Thread(target=play_daddy_home_sound)
         thread2 = threading.Thread(target=type_daddy_home_message)
@@ -401,17 +408,31 @@ while True:
 
 
     elif command.lower() == "spidy lens":
-        subprocess.run(["python", "spidyLens.py"])  # This will run the specified Python file
+        spidy_lens_path = resource_path("spidyLens.py")
+        if os.path.exists(spidy_lens_path):
+            subprocess.run(["python", spidy_lens_path])
+        else:
+            type_writer("Error: spidyLens.py not found!", Fore.RED)
 
     elif command.lower() == "spidy lens global":
-        subprocess.run(["python", "spidyLensGlobal.py"])  # This will run the specified Python file
+        spidy_lens_global_path = resource_path("spidyLensGlobal.py")
+        if os.path.exists(spidy_lens_global_path):
+            subprocess.run(["python", spidy_lens_global_path])
+        else:
+            type_writer("Error: spidyLensGlobal.py not found!", Fore.RED)
 
     elif command.lower() == "exit":
         exit_sequence()
         break  # Exit the loop after the exit sequence is completed
+    
+    elif command.lower() == "fuck":
+            type_writer("what's fuck huh?", Fore.GREEN)
+            
+    elif command.lower() == "fuck you":
+            type_writer("fuck you too, mother fucker 🖕🏻", Fore.GREEN)
 
     elif command.lower() == "help":
-            type_writer("Available Commands: spidy, spidy hacks, spidynal voice, whats today, exit, help", Fore.GREEN)
+            type_writer("Commands here: hey, spidy lens, spidy hacks, whats today, exit, help", Fore.GREEN)
         
 
     else:
