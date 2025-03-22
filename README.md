@@ -1,9 +1,9 @@
-# SPIDY X SYSTEM™ 
+# SPIDYNAL SYSTEM™ 
 
-Welcome to **SPIDY BROZ SYSTEM™ ** - your friendly neighborhood intelligent search assistant powered by Python.
+Welcome to **SPIDYNAL SYSTEM™  ** - your friendly neighborhood intelligent search assistant powered by Python.
 
 ## Description
-SPIDY BROZ SYSTEM™  is an advanced file search assistant that can search files and folders across your system using multithreading and unique animations. It is designed to provide quick search results while delivering a stylish, hacker-themed experience with sound effects and custom branding.
+SPIDYNAL SYSTEM™   is an advanced file search assistant that can search files and folders across your system using multithreading and unique animations. It is designed to provide quick search results while delivering a stylish, hacker-themed experience with sound effects and custom branding.
 
 ### Features:
 - Interactive Search System
