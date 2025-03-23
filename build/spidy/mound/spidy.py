@@ -220,7 +220,7 @@ def type_daddy_home_message():
     type_writer("Daddy is Home Wake Up Spidy 🔥😏", random.choice([Fore.RED, Fore.YELLOW, Fore.LIGHTCYAN_EX]))
     
 def type_appa():
-    type_writer("hehe 😁", random.choice([Fore.RED, Fore.YELLOW, Fore.LIGHTCYAN_EX]))
+    type_writer("hehe 😁", random.choice([Fore.YELLOW, Fore.LIGHTCYAN_EX]))
 
 # Function to play the sound (Make sure to define the play_sound function)
 def play_sound(sound):
