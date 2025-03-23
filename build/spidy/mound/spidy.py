@@ -149,6 +149,8 @@ spidy_online = os.path.join(sound_path, "spidy_online.mp3")
 hacker_mode = os.path.join(sound_path, "hacker_mode.mp3")
 voice_mode = os.path.join(sound_path, "voice_mode.mp3")
 notify_sound = os.path.join(sound_path, "xnotify.mp3")
+appa_sound_path = os.path.join(sound_path, "Appa lu.mp3")
+
 
 # Function to simulate typing effect
 def type_writer(text, color=Fore.GREEN, delay=0.02, end_line=True):
@@ -209,10 +211,16 @@ from colorama import Fore
 # Function to play the sound (Make sure 'dady_home' is a valid path to a sound file)
 def play_daddy_home_sound():
     play_sound(dady_home)  # Make sure 'dady_home' is the correct sound file
+    
+def appa_sound():
+    play_sound(appa_appa)
 
 # Function to simulate the typing effect
 def type_daddy_home_message():
     type_writer("Daddy is Home Wake Up Spidy 🔥😏", random.choice([Fore.RED, Fore.YELLOW, Fore.LIGHTCYAN_EX]))
+    
+def type_appa():
+    type_writer("hehe 😁", random.choice([Fore.RED, Fore.YELLOW, Fore.LIGHTCYAN_EX]))
 
 # Function to play the sound (Make sure to define the play_sound function)
 def play_sound(sound):
@@ -252,6 +260,9 @@ def type_writer(text, color=Fore.GREEN, delay=0.02, end_line=True):
 
 # Function to play sound
 def play_sound(sound):
+    if not os.path.isfile(sound):
+        print(f"Error: Sound file {sound} not found!")
+        return
     try:
         pygame.mixer.music.load(sound)
         pygame.mixer.music.play()
@@ -325,7 +336,7 @@ def play_middle_sound():
 
 # Run both the sound and type_writer concurrently
 thread1 = threading.Thread(target=play_middle_sound)
-thread2 = threading.Thread(target=type_writer, args=("🔥 SPIDY X SYSTEM ONLINE 🕸️", Fore.CYAN))
+thread2 = threading.Thread(target=type_writer, args=("SPIDYNAL SYSTEM ONLINE 🕸️", Fore.CYAN))
 
 # Start both threads
 thread1.start()
@@ -382,7 +393,7 @@ while True:
     import threading
 
 # Assuming you are in the main command loop
-    if command.lower() == "hey":
+    if command.lower() == "wake up":
         # Start both the sound and the typewriter effect concurrently using threads
         thread1 = threading.Thread(target=play_daddy_home_sound)
         thread2 = threading.Thread(target=type_daddy_home_message)
@@ -400,11 +411,23 @@ while True:
         # Display a random Spidy quote and change color
         type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
         
+    elif command.lower() == "appa lu":
+        thread1 = threading.Thread(target=play_sound, args=(appa_sound_path,))
+        thread2 = threading.Thread(target=type_appa)
+        
+        thread1.start()
+        thread2.start()
+        
+        thread1.join()
+        thread2.join()
+        
+        
     elif command.lower() == "spidy hacks":
         hacker_mode_activation()
             
     elif command.lower() == "spidynal voice":
         voice_mode_system()
+        
     elif command.lower() == "whats today":
         # Display a random Spidy quote
         type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
@@ -435,7 +458,7 @@ while True:
             type_writer("fuck you bitch.., you mother fucker..! 🖕🏻", Fore.GREEN)
 
     elif command.lower() == "help":
-            type_writer("Commands here: hey, spidy lens, spidy hacks, whats today, exit, help", Fore.GREEN)
+            type_writer("Commands here: wake up, spidy lens, spidy hacks, whats today, exit, help || and more secrets...", Fore.GREEN)
         
 
     else:
