@@ -16,7 +16,7 @@ SPIDYNAL SYSTEM™   is an advanced file search assistant that can search files 
 ## Installation
 Clone this repository:
 ```bash
-https://github.com/maiz-an/SPIDYNAL-SYSTEM.git
+https://github.com/maiz-an/SPIDYNAL.git
 ```
 
 
