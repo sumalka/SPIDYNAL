@@ -1,26 +1,27 @@
 # Dependabot Configuration File
-# This file enables Dependabot to automatically check for dependency updates.
+# This file enables Dependabot to automatically check for dependencies updates.
 # For more details on configuration options, visit:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
-version: 2
+version: 2  # Corrected: Dependabot only supports version 2
+
 updates:
   # Python dependencies (if using pip)
-  - package-ecosystem: "pip"  # Package manager to use
-    directory: "/"  # Location of the dependency manifest (e.g., requirements.txt)
+  - package-ecosystem: "pip"
+    directory: "/" 
     schedule:
-      interval: "weekly"  # Check for updates every week
-    open-pull-requests-limit: 10  # Maximum number of open PRs Dependabot will create
+      interval: "weekly" 
+    open-pull-requests-limit: 10 
     assignees:
-      - "maiz-an"
+      - "maiz-an"  
       - "sumalka"
     reviewers:
-      - "maiz-an"
+      - "maiz-an" 
       - "sumalka"
 
   # GitHub Actions updates (if using GitHub Actions)
   - package-ecosystem: "github-actions"
-    directory: "/"  # Location of GitHub Actions workflow files (usually .github/workflows/)
+    directory: "/"  
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
