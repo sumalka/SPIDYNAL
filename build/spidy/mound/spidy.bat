@@ -165,7 +165,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 del errorlog.txt 2>nul
 
-:: Close the current CMD window and open a new one in maximized mode
+:: Launch spidy.py in Windows Terminal maximized
 echo Starting SPIDYNAL...
-start /max cmd /k "python spidy.py"
+wt -M python spidy.py
 exit

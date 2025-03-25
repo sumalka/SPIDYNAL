@@ -10,6 +10,7 @@ from shutil import get_terminal_size
 from threading import Thread
 from time import sleep
 import pygame 
+import subprocess
 
 
 def resource_path(relative_path):
@@ -146,12 +147,12 @@ def spidy_lens():
             type_writer("Closing SPIDY LENS...", Fore.RED)
             break
         
-        query = input(f"{Fore.CYAN}Enter the file name or keyword: {Fore.RESET}")
+        query = input(f"{Fore.CYAN}Enter the file name or keyword 🕷️: {Fore.RESET}")
         if query.lower() == "close lens":
             type_writer("Closing SPIDY LENS...", Fore.RED)
             break
 
-        type_writer(f"Searching for '{query}' files with extension '{file_ext}'...", Fore.YELLOW)
+        type_writer(f"Searching for '{query}' files with extension '{file_ext}'... 🕷️", Fore.YELLOW)
         found_items = spidy_lens_search(query, [file_ext])
 
         sys.stdout.write("\r\n")
@@ -159,12 +160,37 @@ def spidy_lens():
             thread1 = threading.Thread(target=play_sound, args=(notify_sound,))
             thread1.start()
             
-            type_writer(f"Found {len(found_items)} results:", Fore.GREEN)
-            for item in found_items:
-                print(item)
+            type_writer(f"Found {len(found_items)} results 🕷️:", Fore.GREEN)
+            for idx, item in enumerate(found_items, 1):
+                print(f"{idx}. {item}")
+                sys.stdout.write("\r\n")
+                
+                action = input(f"{Fore.CYAN}For '{os.path.basename(item)}': [O]pen file, [L]ocation, or [S]kip? (O/L/S): {Fore.RESET}").lower()
+                
+                if action == 'o':
+                    try:
+                        if os.name == 'nt':  # Windows
+                            os.startfile(item)
+                        elif os.name == 'posix':  # Linux or macOS
+                            subprocess.run(['xdg-open' if os.uname().sysname == 'Linux' else 'open', item])
+                        type_writer(f"Opening '{item}'...", Fore.YELLOW)
+                    except Exception as e:
+                        type_writer(f"Error opening file: {e}", Fore.RED)
+                elif action == 'l':
+                    try:
+                        dir_path = os.path.dirname(item)
+                        if os.name == 'nt':  # Windows
+                            os.startfile(dir_path)
+                        elif os.name == 'posix':  # Linux or macOS
+                            subprocess.run(['xdg-open' if os.uname().sysname == 'Linux' else 'open', dir_path])
+                        type_writer(f"Opening location of '{item}'...", Fore.YELLOW)
+                    except Exception as e:
+                        type_writer(f"Error opening location: {e}", Fore.RED)
+                else:
+                    type_writer("Skipping...", Fore.CYAN)
+                sys.stdout.write("\r\n")
         else:
             type_writer(f"No results found for '{query}' with extension '{file_ext}'.", Fore.RED)
-
 
 # Initialize colorama
 init()

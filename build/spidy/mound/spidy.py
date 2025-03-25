@@ -353,7 +353,7 @@ def play_middle_sound():
 
 # Run both the sound and type_writer concurrently
 thread1 = threading.Thread(target=play_middle_sound)
-thread2 = threading.Thread(target=type_writer, args=("[🤝] Connecting to ~SPIDY Private Server...", Fore.MAGENTA))
+thread2 = threading.Thread(target=type_writer, args=("Connecting to ~SPIDY Private Server...", Fore.MAGENTA))
 
 # Start both threads
 thread1.start()
@@ -362,7 +362,7 @@ thread2.start()
 # Wait for both threads to finish
 thread1.join()
 thread2.join()
-type_writer("✅ SPIDY SYSTEM ACTIVATED..!", Fore.GREEN)
+type_writer("SPIDY SYSTEM ACTIVATED..!", Fore.GREEN)
 # Function to play the exit sound and print the exit message
 def exit_sequence():
     # Thread to play the exit sound
