@@ -32,7 +32,7 @@ def type_writer(text, color, delay=0.05):
 
 
 # Update the sound file paths
-sound_path = resource_path("build/spidy/mound/assets")  # Correct relative path
+sound_path = resource_path("assets")  # Correct relative path
 
 # Use os.path.join to build the full paths
 spidy_sound = os.path.join(sound_path, "spidy_sound.mp3")

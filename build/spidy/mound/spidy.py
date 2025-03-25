@@ -137,7 +137,7 @@ print("\n")
 linux_loader_animation()
 
 # Update the sound file paths
-sound_path = resource_path("build/spidy/mound/assets")  # Correct relative path
+sound_path = resource_path("assets")  # Correct relative path
 
 # Use os.path.join to build the full paths
 spidy_sound = os.path.join(sound_path, "spidy_sound.mp3")
@@ -434,14 +434,14 @@ while True:
 
 
     elif command.lower() == "spidy lens":
-        spidy_lens_path = resource_path("build/spidy/mound/spidyLens.py")
+        spidy_lens_path = resource_path("spidyLens.py")
         if os.path.exists(spidy_lens_path):
             subprocess.run(["python", spidy_lens_path])
         else:
             type_writer("Error: spidyLens.py not found!", Fore.RED)
 
     elif command.lower() == "spidy lens global":
-        spidy_lens_global_path = resource_path("build/spidy/mound/spidyLensGlobal.py")
+        spidy_lens_global_path = resource_path("spidyLensGlobal.py")
         if os.path.exists(spidy_lens_global_path):
             subprocess.run(["python", spidy_lens_global_path])
         else:
