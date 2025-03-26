@@ -151,6 +151,81 @@ voice_mode = os.path.join(sound_path, "voice_mode.mp3")
 notify_sound = os.path.join(sound_path, "xnotify.mp3")
 appa_sound_path = os.path.join(sound_path, "Appa lu.mp3")
 
+# Global flag to control the loading animation
+loading_active = False
+
+def loading_animation():
+    """Display a spinning loader until loading_active is False."""
+    spinner = ['|', '/', '-', '\\']
+    while loading_active:
+        for char in spinner:
+            sys.stdout.write(f"\r{Fore.YELLOW}Measuring SPIDY Server Speed... (10-20 seconds) {char}")
+            sys.stdout.flush()
+            time.sleep(0.2)  # Adjust speed of spinner
+            if not loading_active:
+                break
+    # Clear the line after loading finishes
+    sys.stdout.write("\r" + " " * 80 + "\r")
+    sys.stdout.flush()
+
+def get_network_speed():
+    """Measure network speed using speedtest-cli, with psutil as fallback."""
+    global loading_active
+    try:
+        import speedtest  # Requires 'pip install speedtest-cli'
+        
+        # Start the loading animation in a separate thread
+        loading_active = True
+        loader_thread = threading.Thread(target=loading_animation)
+        loader_thread.start()
+        
+        # Perform the speed test
+        st = speedtest.Speedtest()
+        st.get_best_server()  # Find the best server for accurate results
+        download_speed = st.download() / 1_000_000  # Convert bits/sec to Mbps
+        upload_speed = st.upload() / 1_000_000  # Convert bits/sec to Mbps
+        unit = "Mbps"
+        
+        # Stop the loading animation
+        loading_active = False
+        loader_thread.join()  # Wait for the thread to finish
+        
+        return download_speed, upload_speed, unit
+    
+    except ImportError:
+        type_writer("⚠️ Speedtest module not found, falling back to usage monitoring (install with 'pip install speedtest-cli')", Fore.RED)
+        net_io_start = psutil.net_io_counters()
+        start_bytes_sent = net_io_start.bytes_sent
+        start_bytes_recv = net_io_start.bytes_recv
+        
+        type_writer("Measuring current usage... (5 seconds)", Fore.YELLOW, delay=0.01)
+        time.sleep(5)
+        
+        net_io_end = psutil.net_io_counters()
+        end_bytes_sent = net_io_end.bytes_sent
+        end_bytes_recv = net_io_end.bytes_recv
+        
+        upload_bytes = end_bytes_sent - start_bytes_sent
+        download_bytes = end_bytes_recv - start_bytes_recv
+        
+        upload_bits_per_sec = (upload_bytes * 8) / 5
+        download_bits_per_sec = (download_bytes * 8) / 5
+        
+        if download_bits_per_sec >= 1_000_000:
+            download_speed = download_bits_per_sec / 1_000_000
+            upload_speed = upload_bits_per_sec / 1_000_000
+            unit = "Mbps"
+        else:
+            download_speed = download_bits_per_sec / 1_000
+            upload_speed = upload_bits_per_sec / 1_000
+            unit = "kbps"
+        
+        return download_speed, upload_speed, unit
+    
+    except Exception as e:
+        loading_active = False  # Stop loader if it’s running
+        type_writer(f"⚠️ Network Error: {e}. Check your connection or firewall.", Fore.RED)
+        return 0, 0, "Mbps"
 
 # Function to simulate typing effect
 def type_writer(text, color=Fore.GREEN, delay=0.02, end_line=True):
@@ -354,15 +429,16 @@ def play_middle_sound():
 # Run both the sound and type_writer concurrently
 thread1 = threading.Thread(target=play_middle_sound)
 thread2 = threading.Thread(target=type_writer, args=("Connecting to ~SPIDY Private Server...", Fore.MAGENTA))
-
-# Start both threads
 thread1.start()
 thread2.start()
-
-# Wait for both threads to finish
 thread1.join()
 thread2.join()
+
+download_speed, upload_speed, unit = get_network_speed()
+type_writer(f"Network Speed - Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit} 🌐", Fore.CYAN)
+
 type_writer("SPIDY SYSTEM ACTIVATED..!", Fore.GREEN)
+
 # Function to play the exit sound and print the exit message
 def exit_sequence():
     # Thread to play the exit sound
@@ -428,6 +504,25 @@ while True:
     elif command.lower() == "spidynal voice":
         voice_mode_system()
         
+    elif command.lower() == "net speed":
+        download_speed, upload_speed, unit = get_network_speed()
+        box_width = 50
+        speed_text = f"Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit}"
+        padding = (box_width - len(speed_text) - 2) // 2
+        
+        network_box = (
+            f"{Fore.MAGENTA}┌─ Network Speed 🕷️ ─{'─' * (box_width - 23)}\n"
+            f"{Fore.YELLOW}│\n"
+            f"{Fore.YELLOW}│ {' ' * padding}{speed_text}{' ' * (box_width - len(speed_text) - 2 - padding)}\n"
+            f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
+        )
+        
+        sys.stdout.write("\r\n")
+        sys.stdout.flush()
+        
+        for line in network_box.split('\n'):
+            type_writer(line, color='', delay=0.01)
+            
     elif command.lower() == "whats today":
         # Display a random Spidy quote
         type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))

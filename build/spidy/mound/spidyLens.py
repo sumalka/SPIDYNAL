@@ -24,7 +24,7 @@ def resource_path(relative_path):
 pygame.mixer.init()
 
 # Function for typewriting effect
-def type_writer(text, color, delay=0.05):
+def type_writer(text, color, delay=0.01):
     for char in text:
         sys.stdout.write(f"{color}{char}{Fore.RESET}")
         sys.stdout.flush()
@@ -49,7 +49,7 @@ notify_sound = os.path.join(sound_path, "xnotify.mp3")
 
 # Loader class to provide animation during the search
 class Loader:
-    def __init__(self, desc="Searching...", end="Search Completed ✅", timeout=0.1):
+    def __init__(self, desc="Searching...", end=" Search Completed ✅", timeout=0.1):
         self.desc = desc
         self.end = end
         self.timeout = timeout
@@ -138,21 +138,44 @@ def play_sound(sound):
 
 # Main Function
 def spidy_lens():
-    type_writer("Welcome to SPIDY LENS™ — Your Smart File Finder!", Fore.GREEN)
-    type_writer("Type 'close lens' to exit.", Fore.CYAN)
+    sys.stdout.write("\r\n")
+    sys.stdout.write("\r\n")
+    sys.stdout.write("\r\n")
+    welcome_message = (
+        "╔══════════════════════ SPIDY LENS™ ══════════════════════╗\n"
+        "║                                                         ║\n"
+        "║           Welcome to Your Smart File Finder!            ║\n"
+        "║      ──────── Type 'close lens' to exit ────────        ║\n"
+        "║                                                         ║\n"
+        "╚═════════════════════════════════════════════════════════╝"
+    )
+    type_writer(welcome_message, Fore.GREEN)  # Let type_writer apply the color
+    sys.stdout.write("\r\n")
 
     while True:
-        file_ext = input(f"{Fore.CYAN}Enter the file extension 🕷️: {Fore.RESET}")
-        if file_ext.lower() == "close lens":
-            type_writer("Closing SPIDY LENS...", Fore.RED)
-            break
-        
-        query = input(f"{Fore.CYAN}Enter the file name or keyword 🕷️: {Fore.RESET}")
-        if query.lower() == "close lens":
-            type_writer("Closing SPIDY LENS...", Fore.RED)
-            break
+        # Input validation for file extension
+        while True:
+            file_ext = input(f"{Fore.CYAN}  🕷️ Enter the file extension : {Fore.RESET}").strip()
+            if file_ext.lower() == "close lens":
+                type_writer("  Closing SPIDY LENS...", Fore.RED)
+                return
+            if file_ext:
+                break
+            type_writer(" Please enter a valid file extension!", Fore.RED)
+            sys.stdout.write("\r\n")
 
-        type_writer(f"Searching for '{query}' files with extension '{file_ext}'... 🕷️", Fore.YELLOW)
+        # Input validation for file name/keyword
+        while True:
+            query = input(f"{Fore.CYAN}  🕷️ Enter the file name or keyword : {Fore.RESET}").strip()
+            if query.lower() == "close lens":
+                type_writer("   Closing SPIDY LENS...", Fore.RED)
+                return
+            if query and len(query) >= 1:
+                break
+            type_writer("Please enter a valid file name or keyword (at least 1 character)!", Fore.RED)
+            sys.stdout.write("\r\n")
+
+        type_writer(f"  Searching for '{query}' files with extension '{file_ext}'... ", Fore.YELLOW)
         found_items = spidy_lens_search(query, [file_ext])
 
         sys.stdout.write("\r\n")
@@ -160,14 +183,24 @@ def spidy_lens():
             thread1 = threading.Thread(target=play_sound, args=(notify_sound,))
             thread1.start()
             
-            type_writer(f"Found {len(found_items)} results 🕷️:", Fore.GREEN)
+            type_writer(f" Found {len(found_items)} results 🕷️:", Fore.GREEN)
+            
             for idx, item in enumerate(found_items, 1):
-                print(f"{idx}. {item}")
-                sys.stdout.write("\r\n")
-                
-                action = input(f"{Fore.CYAN}For '{os.path.basename(item)}': [O]pen file, [L]ocation, or [S]kip? (O/L/S): {Fore.RESET}").lower()
-                
-                if action == 'o':
+                print(f"  {idx}. {item}")  # Indent results for alignment
+                sys.stdout.write("\r\n")  
+                # Improved UI with consistent spacing and alignment
+                action_prompt = (
+                    f"{Fore.MAGENTA}┌─ Options for '{os.path.basename(item)}' 🕷️ ───────────────\n"  # Header with border
+                    f"{Fore.MAGENTA}|\n"
+                    f"{Fore.YELLOW}│  [1] Open File          [2] Open Location          [3] Skip\n"  # Single-item options
+                    f"{Fore.GREEN}│  [4] Open All Files     [5] Open All Locations     [6] Skip All\n"
+                    f"{Fore.GREEN}│  [7] Close Lens\n"  # All-item options
+                    f"{Fore.MAGENTA}└────────────────────────────────────────────────────────────────────────────\n"  # Footer border
+                    f"{Fore.CYAN}  Enter your choice: "  # Prompt aligned with options
+                )
+                action = input(action_prompt + Fore.RESET).strip()
+
+                if action == '1':  # Open single file
                     try:
                         if os.name == 'nt':  # Windows
                             os.startfile(item)
@@ -176,24 +209,62 @@ def spidy_lens():
                         type_writer(f"Opening '{item}'...", Fore.YELLOW)
                     except Exception as e:
                         type_writer(f"Error opening file: {e}", Fore.RED)
-                elif action == 'l':
+                elif action == '2':  # Open single location
                     try:
                         dir_path = os.path.dirname(item)
                         if os.name == 'nt':  # Windows
                             os.startfile(dir_path)
                         elif os.name == 'posix':  # Linux or macOS
                             subprocess.run(['xdg-open' if os.uname().sysname == 'Linux' else 'open', dir_path])
-                        type_writer(f"Opening location of '{item}'...", Fore.YELLOW)
+                        type_writer(f"   Opening location of '{item}'...",Fore.YELLOW)
                     except Exception as e:
-                        type_writer(f"Error opening location: {e}", Fore.RED)
-                else:
+                        type_writer(f"Error opening location: {e}",Fore.RED)
+                elif action == '3':  # Skip single item
                     type_writer("Skipping...", Fore.CYAN)
+                elif action == '4':  # Open all files
+                    for all_item in found_items:
+                        try:
+                            if os.name == 'nt':
+                                os.startfile(all_item)
+                            elif os.name == 'posix':
+                                subprocess.run(['xdg-open' if os.uname().sysname == 'Linux' else 'open', all_item])
+                            type_writer(f"   Opening '{all_item}'...", Fore.YELLOW)
+                        except Exception as e:
+                            type_writer(f"Error opening file: {e}",Fore.RED)
+                    break  # Exit loop after processing all
+                elif action == '5':  # Open all locations
+                    for all_item in found_items:
+                        try:
+                            dir_path = os.path.dirname(all_item)
+                            if os.name == 'nt':
+                                os.startfile(dir_path)
+                            elif os.name == 'posix':
+                                subprocess.run(['xdg-open' if os.uname().sysname == 'Linux' else 'open', dir_path])
+                            type_writer(f"   Opening location of '{all_item}'...",Fore.YELLOW)
+                        except Exception as e:
+                            type_writer(f"Error opening location: {e}", Fore.RED)
+                    break  # Exit loop after processing all
+                elif action == '6':  # Skip all remaining items
+                    type_writer("  Skipping all remaining items...", Fore.CYAN)
+                    type_writer(" All found locations:", Fore.GREEN)
+                    for index, item in enumerate(found_items, start=1):
+                        print(f"  {index}. {item}")  # Indent locations for alignment
+                    sys.stdout.write("\r\n")  # Extra line after locations
+                    sys.stdout.write("\r\n")  # Extra line after locations
+                    break  # Exit loop without further processing
+                elif action == '7':  # Close lens
+                    type_writer("  Closing SPIDY LENS...", Fore.RED)
+                    sys.stdout.write("\r\n")  # Extra line after locations
+                    return
+                else:  # Invalid input defaults to skip
+                    type_writer("Invalid option, skipping...", Fore.CYAN)
                 sys.stdout.write("\r\n")
         else:
             type_writer(f"No results found for '{query}' with extension '{file_ext}'.", Fore.RED)
-
+            sys.stdout.write("\r\n")
 # Initialize colorama
 init()
 
 # Run the program
 spidy_lens()
+
