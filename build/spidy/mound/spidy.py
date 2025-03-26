@@ -162,7 +162,7 @@ def loading_animation():
     spinner = ['|', '/', '-', '\\']
     while loading_active:
         for char in spinner:
-            sys.stdout.write(f"\r{Fore.YELLOW}Measuring Network Speed... (10-20 seconds) {char}")
+            sys.stdout.write(f"\r{Fore.YELLOW}Measuring Network Speed... (10-20s) {char}")
             sys.stdout.flush()
             time.sleep(0.2)  # Adjust speed of spinner
             if not loading_active:
@@ -550,7 +550,7 @@ while True:
     # Get command input from user with a dynamic typing effect
    
     type_writer(" ", Fore.LIGHTCYAN_EX)
-    type_writer("  SPIDYNAL™ 🕷️: ", Fore.CYAN, delay=0.02, end_line=False)
+    type_writer(" SPIDYNAL™ 🕷️: ", Fore.CYAN, delay=0.02, end_line=False)
     command = input()
 
     import threading
