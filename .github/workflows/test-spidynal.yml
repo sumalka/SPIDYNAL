@@ -1,24 +1,24 @@
-name: Test SPIDYNAL Action
+name: Test Spidynal Action
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   test-spidynal:
-    runs-on: windows-latest # Docker with Windows image needs a Windows runner
+    runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run SPIDYNAL Action - Net Speed
+      - name: Run Spidynal Action - Net Speed
         uses: ./
         with:
           command: "net speed"
 
-      - name: Run SPIDYNAL Action - Spidy Lens
+      - name: Run Spidynal Action - Spidy Lens
         uses: ./
         with:
           command: "spidy lens"
