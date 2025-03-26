@@ -4,7 +4,7 @@ author: "YourGitHubUsername"
 
 inputs:
   command:
-    description: "The SPIDYNAL command to run (e.g., 'net speed', 'spidy lens')"
+    description: "SPIDYNAL command to run (e.g., 'net speed', 'spidy lens')"
     required: true
     default: "net speed"
   query:
@@ -17,6 +17,11 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - "run_spidynal.bat"
+    - ${{ inputs.command }}
+    - ${{ inputs.query }}
+    - ${{ inputs.extension }}
 
 branding:
   icon: "spider-web"
