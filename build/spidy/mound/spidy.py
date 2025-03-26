@@ -252,8 +252,77 @@ spidy_quotes = [
     "With great power comes great responsibility! ⚡",
     "Web-slinging through the streets...💨",
     "I’m always watching... 😏",
-    "Spidy is always ready for action! 🔥"
+    "Spidy is always ready for action! 🔥",
+    "No wall is too high for Spidy! 🚀",
+    "Swinging between skyscrapers like a pro! 🌆️",
+    "Justice never takes a day off! 💪",
+    "Villains beware, Spidy is here! 👀",
+    "Every web tells a story... 🌟",
+    "Caught in my web? Too bad! 🕷️",
+    "Even heroes need a break... Nah, just kidding! 😉",
+    "When in doubt, web it out! 🕸️",
+    "Not all heroes wear capes... some swing! 🚀",
+    "Saving the city, one web at a time! 🤖",
+    "Spidy senses tingling... danger ahead! 😱",
+    "Balancing life and heroism like a pro! ⚖️",
+    "A good day starts with web-slinging! 🌟",
+    "Crime doesn’t stand a chance! 🚫",
+    "Even the night sky isn’t safe from Spidy! 🌚",
+    "Thwip! Another villain down! 👊",
+    "No traffic jams when you swing through the city! 🚗",
+    "Quick reflexes, sharp mind, stronger web! 🎯",
+    "Where there’s trouble, there’s Spidy! 🦅",
+    "Master of the web, king of the city! 👑",
+    "Heroes aren’t born, they’re webbed! 🕷️",
+    "The city sleeps, but Spidy never does! 🌙",
+    "Webs stronger than steel, heart braver than fire! 🥷",
+    "A day without action? Not for Spidy! 🚀",
+    "Faster than a speeding bullet? No, but close! 💪",
+    "Not just a hero, but a legend! 🏆",
+    "Swinging through life, one web at a time! 🕸️",
+    "The web is my weapon, the city is my home! 🌆️",
+    "Webs are temporary, but heroism is forever! 🧠",
+    "Got villains? I got webs! 🕷️",
+    "No crime goes unnoticed under my watch! 👁️‍🗨️",
+    "Hanging out, literally! 🥺",
+    "It’s not about strength, it’s about agility! 🏃",
+    "One swing closer to saving the day! 🏆",
+    "Even gravity respects my moves! 🥺",
+    "Up, up, and away! Wait, wrong hero! 😅",
+    "The best way to travel? Web-slinging, of course! 🌄",
+    "No mission is too tough for Spidy! 🙌",
+    "Webbing up trouble, one villain at a time! 🧡",
+    "I don’t need a GPS, just my Spidy senses! 📊",
+    "High above the city, where I belong! 🚀",
+    "The night is dark, but my webs shine bright! 🌟",
+    "No need for an elevator when you have webs! 🌆️",
+    "Call me the acrobat of justice! 🌟",
+    "One leap ahead of danger, always! 🤼",
+    "No villains allowed in my city! 🤖",
+    "You can’t outrun a web! 😂",
+    "Scaling walls like it’s second nature! 🦅",
+    "Flying without wings, swinging without fear! 💃",
+    "Courage is my superpower! 🧠",
+    "Even legends need practice! 🏆",
+    "The city’s safety is my top priority! 🤖",
+    "Some people jog, I swing! 🏃",
+    "Not all heroes fight with fists! 💪",
+    "Quick wit, quick webs, quicker victories! 👀",
+    "I may be upside down, but I never lose my way! 🕸️",
+    "Every hero has a mission, mine is to protect! 💪",
+    "Webbed up and ready to roll! 🏆",
+    "Villains may run, but they can't hide! 👀",
+    "Crime doesn’t pay, but webs sure do! 🥺",
+    "Justice swings swift and true! 🦸‍♂️",
+    "Heroes aren’t defined by their powers, but their choices! ⚖️",
+    "Behind the mask, a heart beats for justice! ❤️",
+    "No challenge too great, no villain too tough! 🕷️",
+    "Hanging by a thread? Just another day! 🦅",
+    "Call me the Web Warrior! 🚀",
+    "Gravity? Never heard of it! 🥺",
+    "A city full of wonders, and I’m its guardian! 🕷️"
 ]
+
 
 # Function to get a random Spidy quote
 def get_random_spidy_quote():
@@ -523,7 +592,7 @@ while True:
         for line in network_box.split('\n'):
             type_writer(line, color='', delay=0.01)
             
-    elif command.lower() == "whats today":
+    elif command.lower() == "say it":
         # Display a random Spidy quote
         type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
 
@@ -553,10 +622,25 @@ while True:
             type_writer("fuck you bitch.., you mother fucker..! 🖕🏻", Fore.GREEN)
 
     elif command.lower() == "help":
-            type_writer("Commands here: wake up, spidy lens, spidy hacks, whats today, exit, help || and more secrets...", Fore.GREEN)
+    box_width = 50
+    help_text = "net speed, spidy lens, say it, exit, help,"
+    padding = (box_width - len(help_text) - 2) // 2
+    
+    help_box = (
+        f"{Fore.MAGENTA}┌─ Available Commands 🕷️ ─{'─' * (box_width - 23)}\n"
+        f"{Fore.YELLOW}│\n"
+        f"{Fore.YELLOW}│ {' ' * padding}{help_text}{' ' * (box_width - len(help_text) - 2 - padding)}\n"
+        f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
+    )
+    
+    sys.stdout.write("\r\n")
+    sys.stdout.flush()
+    
+    for line in help_box.split('\n'):
+        type_writer(line, color='', delay=0.01)
         
 
     else:
         # Randomly change the color for an "Invalid Command"
         invalid_colors = [Fore.RED, Fore.YELLOW, Fore.MAGENTA, Fore.LIGHTCYAN_EX]
-        type_writer(f"Invalid Command... Try Again 😏", random.choice(invalid_colors))
+        type_writer(f"Invalid Command... Try Again ", random.choice(invalid_colors))
