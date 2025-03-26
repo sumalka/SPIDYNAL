@@ -376,10 +376,10 @@ def appa_sound():
 
 # Function to simulate the typing effect
 def type_daddy_home_message():
-    type_writer("Daddy is Home Wake Up Spidy 🔥😏", random.choice([Fore.RED, Fore.YELLOW, Fore.LIGHTCYAN_EX]))
+    type_writer("  Daddy is Home Wake Up Spidy 🔥😏", random.choice([Fore.RED, Fore.YELLOW, Fore.LIGHTCYAN_EX]))
     
 def type_appa():
-    type_writer("hehe 😁", random.choice([Fore.YELLOW, Fore.LIGHTCYAN_EX]))
+    type_writer("  hehe 😁", random.choice([Fore.YELLOW, Fore.LIGHTCYAN_EX]))
 
 # Function to play the sound (Make sure to define the play_sound function)
 def play_sound(sound):
@@ -401,11 +401,11 @@ def type_writer(text, color=Fore.GREEN, delay=0.02, end_line=True):
         print()  # To move to the next line if needed
 
 spidy_quotes = [
-    "I am your friendly neighborhood Spidy! 🕷️",
-    "With great power comes great responsibility! ⚡",
-    "Web-slinging through the streets...💨",
-    "I’m always watching... 😏",
-    "Spidy is always ready for action! 🔥"
+    "  I am your friendly neighborhood Spidy! 🕷️",
+    "  With great power comes great responsibility! ⚡",
+    "  Web-slinging through the streets...💨",
+    "  I’m always watching... 😏",
+    "  Spidy is always ready for action! 🔥"
 ]
 
 # Function to simulate typing effect
@@ -550,7 +550,7 @@ while True:
     # Get command input from user with a dynamic typing effect
    
     type_writer(" ", Fore.LIGHTCYAN_EX)
-    type_writer("SPIDYNAL™ 🕷️: ", Fore.CYAN, delay=0.02, end_line=False)
+    type_writer("  SPIDYNAL™ 🕷️: ", Fore.CYAN, delay=0.02, end_line=False)
     command = input()
 
     import threading

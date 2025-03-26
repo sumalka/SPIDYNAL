@@ -168,7 +168,7 @@ def spidy_lens():
         while True:
             query = input(f"{Fore.CYAN}  🕷️ Enter the file name or keyword : {Fore.RESET}").strip()
             if query.lower() == "close lens":
-                type_writer("   Closing SPIDY LENS...", Fore.RED)
+                type_writer("  Closing SPIDY LENS...", Fore.RED)
                 return
             if query and len(query) >= 1:
                 break
