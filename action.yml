@@ -1,5 +1,5 @@
-name: "SPIDYNAL Action"
-description: "Run SPIDYNAL, a Spider-Man-themed utility, in your GitHub workflow."
+name: "Spidynal Action"
+description: "Run SPIDYNAL, a Spider-Man-themed utility for network speed testing and file searching, in your GitHub workflow."
 author: "YourGitHubUsername"
 
 inputs:
@@ -9,10 +9,12 @@ inputs:
     default: "net speed"
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.command }}
+  using: "composite"
+  steps:
+    - name: Run SPIDYNAL.exe
+      shell: cmd
+      run: |
+        SPIDYNAL.exe ${{ inputs.command }}
 
 branding:
   icon: "spider-web"
