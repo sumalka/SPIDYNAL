@@ -1,8 +1,6 @@
 # SPIDYNAL SYSTEM™
 
-**SPIDYNAL SYSTEM™** - Intelligent search assistant powered by Python.
-
-## Description
+### Description
 SPIDYNAL SYSTEM™ is an advanced file search and system testing tool designed to efficiently locate files and folders across your system using multithreaded processing. Engineered for speed and reliability, it delivers rapid search results and features a network speed meter for real-time diagnostics. Tailored for professional and technical users, this tool provides a robust solution for file management and system performance testing, enhanced with sound effects and a hacker-inspired thematic design. Additional features are under development, with an upcoming capability to perform advanced search and diagnostic reporting.
 
 **Version: 1.3.0.4**
