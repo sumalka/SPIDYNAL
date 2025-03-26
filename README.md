@@ -1,21 +1,15 @@
 # SPIDYNAL SYSTEM™
 
-Welcome to **SPIDYNAL SYSTEM™** - your friendly neighborhood intelligent search assistant powered by Python.
+**SPIDYNAL SYSTEM™** - Intelligent search assistant powered by Python.
 
 ## Description
-SPIDYNAL SYSTEM™ is an advanced file search assistant that can search files and folders across your system using multithreading and unique animations. It is designed to provide quick search results while delivering a stylish, hacker-themed experience with sound effects and custom branding.
+SPIDYNAL SYSTEM™ is an advanced file search and system testing tool designed to efficiently locate files and folders across your system using multithreaded processing. Engineered for speed and reliability, it delivers rapid search results and features a network speed meter for real-time diagnostics. Tailored for professional and technical users, this tool provides a robust solution for file management and system performance testing, enhanced with sound effects and a hacker-inspired thematic design. Additional features are under development, with an upcoming capability to perform advanced search and diagnostic reporting.
 
 **Version: 1.3.0.4**
 
 ### Features:
-- Interactive Search System
-- Multithreaded Search for Faster Results
-- Custom Terminal Animations and Progress Indicators
-- Sound Effects for Immersive Experience
-- Advanced File Filtering by Name & Extension
-- Windows & Linux Compatibility
-- Modern UI with Typewriter Effect
-- Optimized Performance for Large-Scale Searches
+- Advanced File search
+- Network Speed Meter
 
 ## Installation
 Clone this repository:
@@ -23,19 +17,10 @@ Clone this repository:
 https://github.com/maiz-an/SPIDYNAL.git
 ```
 
-### Dependencies:
-Ensure you have the following installed before running SPIDYNAL SYSTEM™:
-```bash
-pip install pygame colorama termcolor
-```
-
 ## How to Use
-1. Run the Application By executing **SPIDYNAL.EXE**.
-2. Follow the on-screen instructions.
-3. Type `spidy lens` to activate the lens.
-4. Enter the file name or keyword you want to search.
-5. Choose actions to open, explore, or skip results.
-6. To exit, type `close lens`.
+1. Run the application by executing **SPIDYNAL.EXE**.
+2. Type `Help` to view the available public features.
+3. Type `Exit` to close the program.
 
 ## Contribute to SPIDYNAL SYSTEM™
 We are looking for talented **Python Developers** to contribute and help improve **SPIDYNAL SYSTEM™**. If you're passionate about coding, enjoy working on innovative projects, and want to shape the future of this intelligent search system, join us!
