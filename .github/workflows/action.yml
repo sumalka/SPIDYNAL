@@ -1,0 +1,23 @@
+name: "SPIDYNAL Action"
+description: "Run SPIDYNAL commands like file search or network speed testing in your GitHub workflow."
+author: "YourGitHubUsername"
+
+inputs:
+  command:
+    description: "The SPIDYNAL command to run (e.g., 'net speed', 'spidy lens')"
+    required: true
+    default: "net speed"
+  query:
+    description: "Query for spidy lens (e.g., file name or keyword)"
+    required: false
+  extension:
+    description: "File extension for spidy lens (e.g., '.txt')"
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "spider-web"
+  color: "red"
