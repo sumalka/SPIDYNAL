@@ -11,7 +11,10 @@ from colorama import Fore
 from queue import Queue
 from threading import Lock
 
+os.system("title SPIDYNAL")
+
 import subprocess
+
 
 def resource_path(relative_path):
     """Get absolute path to resource, works for dev and PyInstaller."""
@@ -159,7 +162,7 @@ def loading_animation():
     spinner = ['|', '/', '-', '\\']
     while loading_active:
         for char in spinner:
-            sys.stdout.write(f"\r{Fore.YELLOW}Measuring SPIDY Server Speed... (10-20 seconds) {char}")
+            sys.stdout.write(f"\r{Fore.YELLOW}Measuring Network Speed... (10-20 seconds) {char}")
             sys.stdout.flush()
             time.sleep(0.2)  # Adjust speed of spinner
             if not loading_active:
@@ -168,8 +171,8 @@ def loading_animation():
     sys.stdout.write("\r" + " " * 80 + "\r")
     sys.stdout.flush()
 
-def get_network_speed():
-    """Measure network speed using speedtest-cli, with psutil as fallback."""
+def get_network_speed(retries=3, delay_between_retries=2):
+    """Measure network speed using speedtest-cli with retries, falling back to psutil if needed."""
     global loading_active
     try:
         import speedtest  # Requires 'pip install speedtest-cli'
@@ -179,21 +182,30 @@ def get_network_speed():
         loader_thread = threading.Thread(target=loading_animation)
         loader_thread.start()
         
-        # Perform the speed test
-        st = speedtest.Speedtest()
-        st.get_best_server()  # Find the best server for accurate results
-        download_speed = st.download() / 1_000_000  # Convert bits/sec to Mbps
-        upload_speed = st.upload() / 1_000_000  # Convert bits/sec to Mbps
-        unit = "Mbps"
+        # Retry logic for speed test
+        for attempt in range(retries):
+            try:
+                st = speedtest.Speedtest()
+                st.get_best_server()  # Find the best server for accurate results
+                download_speed = st.download() / 1_000_000  # Convert bits/sec to Mbps
+                upload_speed = st.upload() / 1_000_000  # Convert bits/sec to Mbps
+                unit = "Mbps"
+                
+                # Stop the loading animation
+                loading_active = False
+                loader_thread.join()  # Wait for the thread to finish
+                return download_speed, upload_speed, unit
+            
+            except Exception as e:
+                if attempt < retries - 1:  # If not the last attempt
+                    type_writer(f"⚠️ Attempt {attempt + 1} failed: {e}. Retrying in {delay_between_retries} seconds...", Fore.YELLOW)
+                    time.sleep(delay_between_retries)
+                else:
+                    raise e  # Raise the exception if all retries fail
         
-        # Stop the loading animation
-        loading_active = False
-        loader_thread.join()  # Wait for the thread to finish
-        
-        return download_speed, upload_speed, unit
-    
     except ImportError:
         type_writer("⚠️ Speedtest module not found, falling back to usage monitoring (install with 'pip install speedtest-cli')", Fore.RED)
+        import psutil
         net_io_start = psutil.net_io_counters()
         start_bytes_sent = net_io_start.bytes_sent
         start_bytes_recv = net_io_start.bytes_recv
@@ -220,10 +232,13 @@ def get_network_speed():
             upload_speed = upload_bits_per_sec / 1_000
             unit = "kbps"
         
+        loading_active = False
+        loader_thread.join()
         return download_speed, upload_speed, unit
     
     except Exception as e:
         loading_active = False  # Stop loader if it’s running
+        loader_thread.join()
         type_writer(f"⚠️ Network Error: {e}. Check your connection or firewall.", Fore.RED)
         return 0, 0, "Mbps"
 
@@ -503,6 +518,9 @@ thread2.start()
 thread1.join()
 thread2.join()
 
+time.sleep(2)  # Wait 2 seconds before testing network speed
+
+# Test network speed with retries
 download_speed, upload_speed, unit = get_network_speed()
 type_writer(f"Network Speed - Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit} 🌐", Fore.CYAN)
 
@@ -622,22 +640,22 @@ while True:
             type_writer("fuck you bitch.., you mother fucker..! 🖕🏻", Fore.GREEN)
 
     elif command.lower() == "help":
-    box_width = 50
-    help_text = "net speed, spidy lens, say it, exit, help,"
-    padding = (box_width - len(help_text) - 2) // 2
-    
-    help_box = (
-        f"{Fore.MAGENTA}┌─ Available Commands 🕷️ ─{'─' * (box_width - 23)}\n"
-        f"{Fore.YELLOW}│\n"
-        f"{Fore.YELLOW}│ {' ' * padding}{help_text}{' ' * (box_width - len(help_text) - 2 - padding)}\n"
-        f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
-    )
-    
-    sys.stdout.write("\r\n")
-    sys.stdout.flush()
-    
-    for line in help_box.split('\n'):
-        type_writer(line, color='', delay=0.01)
+        box_width = 50
+        help_text = "net speed, spidy lens, say it, exit, help,"
+        padding = (box_width - len(help_text) - 2) // 2
+        
+        help_box = (
+            f"{Fore.MAGENTA}┌─ Available Commands 🕷️ ─{'─' * (box_width - 23)}\n"
+            f"{Fore.YELLOW}│\n"
+            f"{Fore.YELLOW}│ {' ' * padding}{help_text}{' ' * (box_width - len(help_text) - 2 - padding)}\n"
+            f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
+        )
+        
+        sys.stdout.write("\r\n")
+        sys.stdout.flush()
+        
+        for line in help_box.split('\n'):
+            type_writer(line, color='', delay=0.01)
         
 
     else:
