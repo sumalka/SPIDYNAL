@@ -1,14 +1,8 @@
-# Use an official Python runtime as the base image
-FROM python:3.9-slim
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-# Set working directory
 WORKDIR /app
 
-# Copy your project files
-COPY . .
+COPY SPIDYNAL.exe .
+COPY run_spidynal.bat .
 
-# Install dependencies
-RUN pip install pygame colorama termcolor speedtest-cli psutil
-
-# Command to run your script with inputs
-ENTRYPOINT ["python", "spidy.py"]
+CMD ["cmd.exe", "/c", "run_spidynal.bat"]
