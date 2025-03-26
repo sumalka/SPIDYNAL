@@ -144,7 +144,7 @@ def spidy_lens():
     welcome_message = (
         "╔══════════════════════ SPIDY LENS™ ══════════════════════╗\n"
         "║                                                         ║\n"
-        "║           Welcome to Your Smart File Finder!            ║\n"
+        "║                  Advanced File Search                   ║\n"
         "║      ──────── Type 'close lens' to exit ────────        ║\n"
         "║                                                         ║\n"
         "╚═════════════════════════════════════════════════════════╝"
