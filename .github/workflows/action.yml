@@ -1,5 +1,0 @@
-runs:
-  using: "composite"
-  steps:
-    - run: .\run_spidynal.bat "${{ inputs.command }}" "${{ inputs.query }}" "${{ inputs.extension }}"
-      shell: cmd
