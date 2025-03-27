@@ -23,5 +23,5 @@ runs:
         SPIDYNAL.exe ${{ inputs.command }} ${{ inputs.query }} ${{ inputs.extension }}
 
 branding:
-  icon: "spider-web"
+  icon: "code"
   color: "red"
