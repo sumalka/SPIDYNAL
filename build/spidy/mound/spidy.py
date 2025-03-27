@@ -333,7 +333,6 @@ spidy_quotes = [
     "Behind the mask, a heart beats for justice! ❤️",
     "No challenge too great, no villain too tough! 🕷️",
     "Hanging by a thread? Just another day! 🦅",
-    "Call me the Web Warrior! 🚀",
     "Gravity? Never heard of it! 🥺",
     "A city full of wonders, and I’m its guardian! 🕷️"
 ]
