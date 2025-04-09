@@ -11,7 +11,7 @@ SPIDYNAL SYSTEM™ is an advanced file search and system testing tool designed t
 - (Under Construction)
 
 ## Installation
-1. Go to the [SPIDYNAL](https://github.com/maiz-an/SPIDYNAL/releases) page.
+1. Go to the [SPIDYNAL](https://maiz-an.github.io/SPIDYNAL/) page.
 2. Click the Download button.</li>
 3. Extract the downloaded folder to your desired location.
 
