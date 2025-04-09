@@ -11,8 +11,34 @@ from threading import Thread
 from time import sleep
 import pygame 
 import subprocess
+from datetime import datetime
+import string
+import ctypes
 
+def get_available_drives():
+    """Return a list of currently connected and accessible drive letters."""
+    drives = []
+    bitmask = ctypes.cdll.kernel32.GetLogicalDrives()
+    for i, letter in enumerate(string.ascii_uppercase):
+        if bitmask & (1 << i):
+            drives.append(f"{letter}:\\")
+    return drives
 
+# Function to play the exit sound and print the exit message
+def exit_sequence():
+    # Thread to play the exit sound
+    thread1 = threading.Thread(target=play_sound, args=(spidy_sound,))
+    # Thread to start the typewriter effect for exit message
+    thread2 = threading.Thread(target=type_writer, args=("SPIDY BROZ SYSTEM OFFLINE 😴", Fore.YELLOW))
+
+    # Start both threads
+    thread1.start()
+    thread2.start()
+
+    # Wait for both threads to finish
+    thread1.join()
+    thread2.join()
+    
 def resource_path(relative_path):
     """Get absolute path to resource, works for dev and PyInstaller."""
     if hasattr(sys, '_MEIPASS'):
@@ -103,11 +129,14 @@ def spidy_lens_search_drive(query, drive, extensions, found_items, progress_queu
 
 # Main Search Function
 def spidy_lens_search(query, extensions):
-    drives = ['C:\\', 'D:\\', 'E:\\']
+    drives = get_available_drives()  # Automatically detects actual, live drives
+    type_writer(f"🔍 Scanning the following drives: {', '.join(drives)}", Fore.LIGHTCYAN_EX)
+    
     found_items = []
     lock = threading.Lock()
     progress_queue = Queue()
     threads = []
+
     total_items = 0
 
     # Start search threads for each drive
@@ -192,8 +221,8 @@ def spidy_lens():
                 action_prompt = (
                     f"{Fore.MAGENTA}┌─ Options for '{os.path.basename(item)}' 🕷️ ───────────────\n"  # Header with border
                     f"{Fore.MAGENTA}|\n"
-                    f"{Fore.YELLOW}│  [1] Open File          [2] Open Location          [3] Skip\n"  # Single-item options
-                    f"{Fore.GREEN}│  [4] Open All Files     [5] Open All Locations     [6] Skip All\n"
+                    f"{Fore.YELLOW}│  [1] Open File          [2] Open Location          [3] Next\n"  # Single-item options
+                    f"{Fore.GREEN}│  [4] Open All Files     [5] Open All Locations     [6] Show All\n"
                     f"{Fore.GREEN}│  [7] Close Lens\n"  # All-item options
                     f"{Fore.MAGENTA}└────────────────────────────────────────────────────────────────────────────\n"  # Footer border
                     f"{Fore.CYAN}  Enter your choice: "  # Prompt aligned with options
@@ -244,8 +273,7 @@ def spidy_lens():
                         except Exception as e:
                             type_writer(f"Error opening location: {e}", Fore.RED)
                     break  # Exit loop after processing all
-                elif action == '6':  # Skip all remaining items
-                    type_writer("  Skipping all remaining items...", Fore.CYAN)
+                elif action == '6':  # Show all items
                     type_writer(" All found locations:", Fore.GREEN)
                     for index, item in enumerate(found_items, start=1):
                         print(f"  {index}. {item}")  # Indent locations for alignment
@@ -266,5 +294,11 @@ def spidy_lens():
 init()
 
 # Run the program
-spidy_lens()
-
+if __name__ == "__main__":
+    try:
+        spidy_lens()
+    except KeyboardInterrupt:
+        now = datetime.now().strftime("%H:%M:%S")
+        type_writer(f"\n🕷️ [{now}] SPIDY LENS interrupted by user. pressed Ctrl + C. Exiting SPIDYNAL safely...", Fore.RED)
+        exit_sequence()
+        sys.exit(0)

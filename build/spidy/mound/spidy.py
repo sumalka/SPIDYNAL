@@ -10,6 +10,7 @@ from queue import Queue
 from colorama import Fore
 from queue import Queue
 from threading import Lock
+from datetime import datetime
 
 os.system("title SPIDYNAL")
 
@@ -371,7 +372,7 @@ def play_daddy_home_sound():
     play_sound(dady_home)  # Make sure 'dady_home' is the correct sound file
     
 def appa_sound():
-    play_sound(appa_appa)
+    play_sound(type_appa)
 
 # Function to simulate the typing effect
 def type_daddy_home_message():
@@ -517,11 +518,11 @@ thread2.start()
 thread1.join()
 thread2.join()
 
-time.sleep(2)  # Wait 2 seconds before testing network speed
+# time.sleep(2)  # Wait 2 seconds before testing network speed
 
 # Test network speed with retries
-download_speed, upload_speed, unit = get_network_speed()
-type_writer(f"Network Speed - Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit} 🌐", Fore.CYAN)
+# download_speed, upload_speed, unit = get_network_speed()
+# type_writer(f"Network Speed - Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit} 🌐", Fore.CYAN)
 
 type_writer("SPIDY SYSTEM ACTIVATED..!", Fore.GREEN)
 
@@ -544,120 +545,129 @@ def exit_sequence():
 # thread = threading.Thread(target=play_sound, args=(middle,))
 # thread.start()
 
-while True:
+try:
+
+    while True:
+        
+        # Get command input from user with a dynamic typing effect
     
-    # Get command input from user with a dynamic typing effect
-   
-    type_writer(" ", Fore.LIGHTCYAN_EX)
-    type_writer(" SPIDYNAL™ 🕷️: ", Fore.CYAN, delay=0.02, end_line=False)
-    command = input()
+        type_writer(" ", Fore.LIGHTCYAN_EX)
+        type_writer(" SPIDYNAL™ 🕷️: ", Fore.CYAN, delay=0.02, end_line=False)
+        command = input()
 
-    import threading
+        import threading
 
-# Assuming you are in the main command loop
-    if command.lower() == "wake up":
-        # Start both the sound and the typewriter effect concurrently using threads
-        thread1 = threading.Thread(target=play_daddy_home_sound)
-        thread2 = threading.Thread(target=type_daddy_home_message)
+    # Assuming you are in the main command loop
+        if command.lower() == "wake up":
+            # Start both the sound and the typewriter effect concurrently using threads
+            thread1 = threading.Thread(target=play_daddy_home_sound)
+            thread2 = threading.Thread(target=type_daddy_home_message)
 
-        # Start both threads
-        thread1.start()
-        thread2.start()
+            # Start both threads
+            thread1.start()
+            thread2.start()
 
-        # Wait for both threads to finish
-        thread1.join()
-        thread2.join()
+            # Wait for both threads to finish
+            thread1.join()
+            thread2.join()
 
 
-    elif command.lower() == "whats today":
-        # Display a random Spidy quote and change color
-        type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
-        
-    elif command.lower() == "appa lu":
-        thread1 = threading.Thread(target=play_sound, args=(appa_sound_path,))
-        thread2 = threading.Thread(target=type_appa)
-        
-        thread1.start()
-        thread2.start()
-        
-        thread1.join()
-        thread2.join()
-        
-        
-    elif command.lower() == "spidy hacks":
-        hacker_mode_activation()
+        elif command.lower() == "whats today":
+            # Display a random Spidy quote and change color
+            type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
             
-    elif command.lower() == "spidynal voice":
-        voice_mode_system()
-        
-    elif command.lower() == "net speed":
-        download_speed, upload_speed, unit = get_network_speed()
-        box_width = 50
-        speed_text = f"Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit}"
-        padding = (box_width - len(speed_text) - 2) // 2
-        
-        network_box = (
-            f"{Fore.MAGENTA}┌─ Network Speed 🕷️ ─{'─' * (box_width - 23)}\n"
-            f"{Fore.YELLOW}│\n"
-            f"{Fore.YELLOW}│ {' ' * padding}{speed_text}{' ' * (box_width - len(speed_text) - 2 - padding)}\n"
-            f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
-        )
-        
-        sys.stdout.write("\r\n")
-        sys.stdout.flush()
-        
-        for line in network_box.split('\n'):
-            type_writer(line, color='', delay=0.01)
+        elif command.lower() == "appa lu":
+            thread1 = threading.Thread(target=play_sound, args=(appa_sound_path,))
+            thread2 = threading.Thread(target=type_appa)
             
-    elif command.lower() == "say it":
-        # Display a random Spidy quote
-        type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
+            thread1.start()
+            thread2.start()
+            
+            thread1.join()
+            thread2.join()
+            
+            
+        elif command.lower() == "spidy hacks":
+            hacker_mode_activation()
+                
+        elif command.lower() == "spidynal voice":
+            voice_mode_system()
+            
+        elif command.lower() == "net speed":
+            download_speed, upload_speed, unit = get_network_speed()
+            box_width = 50
+            speed_text = f"Download: {download_speed:.2f} {unit} | Upload: {upload_speed:.2f} {unit}"
+            padding = (box_width - len(speed_text) - 2) // 2
+            
+            network_box = (
+                f"{Fore.MAGENTA}┌─ Network Speed 🕷️ ─{'─' * (box_width - 23)}\n"
+                f"{Fore.YELLOW}│\n"
+                f"{Fore.YELLOW}│ {' ' * padding}{speed_text}{' ' * (box_width - len(speed_text) - 2 - padding)}\n"
+                f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
+            )
+            
+            sys.stdout.write("\r\n")
+            sys.stdout.flush()
+            
+            for line in network_box.split('\n'):
+                type_writer(line, color='', delay=0.01)
+                
+        elif command.lower() == "say it":
+            # Display a random Spidy quote
+            type_writer(get_random_spidy_quote(), random.choice([Fore.LIGHTGREEN_EX, Fore.CYAN, Fore.MAGENTA]))
 
 
-    elif command.lower() == "spidy lens":
-        spidy_lens_path = resource_path("spidyLens.py")
-        if os.path.exists(spidy_lens_path):
-            subprocess.run(["python", spidy_lens_path])
+        elif command.lower() == "spidy lens":
+            spidy_lens_path = resource_path("spidyLens.py")
+            if os.path.exists(spidy_lens_path):
+                subprocess.run(["python", spidy_lens_path])
+            else:
+                type_writer("Error: spidyLens.py not found!", Fore.RED)
+
+        elif command.lower() == "spidy lens global":
+            spidy_lens_global_path = resource_path("spidyLensGlobal.py")
+            if os.path.exists(spidy_lens_global_path):
+                subprocess.run(["python", spidy_lens_global_path])
+            else:
+                type_writer("Error: spidyLensGlobal.py not found!", Fore.RED)
+
+        elif command.lower() == "exit":
+            exit_sequence()
+            break  # Exit the loop after the exit sequence is completed
+        
+        elif command.lower() == "fuck":
+                type_writer("what's fuck huh?", Fore.GREEN)
+                
+        elif command.lower() == "fuck you":
+                type_writer("fuck you bitch.., you mother fucker..! 🖕🏻", Fore.GREEN)
+
+        elif command.lower() == "help":
+            box_width = 50
+            help_text = "net speed, spidy lens, say it, exit, help,"
+            padding = (box_width - len(help_text) - 2) // 2
+            
+            help_box = (
+                f"{Fore.MAGENTA}┌─ Available Commands 🕷️ ─{'─' * (box_width - 23)}\n"
+                f"{Fore.YELLOW}│\n"
+                f"{Fore.YELLOW}│ {' ' * padding}{help_text}{' ' * (box_width - len(help_text) - 2 - padding)}\n"
+                f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
+            )
+            
+            sys.stdout.write("\r\n")
+            sys.stdout.flush()
+            
+            for line in help_box.split('\n'):
+                type_writer(line, color='', delay=0.01)
+            
+
         else:
-            type_writer("Error: spidyLens.py not found!", Fore.RED)
+            # Randomly change the color for an "Invalid Command"
+            invalid_colors = [Fore.RED, Fore.YELLOW, Fore.MAGENTA, Fore.LIGHTCYAN_EX]
+            type_writer(f"Invalid Command... Try Again ", random.choice(invalid_colors))
 
-    elif command.lower() == "spidy lens global":
-        spidy_lens_global_path = resource_path("spidyLensGlobal.py")
-        if os.path.exists(spidy_lens_global_path):
-            subprocess.run(["python", spidy_lens_global_path])
-        else:
-            type_writer("Error: spidyLensGlobal.py not found!", Fore.RED)
 
-    elif command.lower() == "exit":
-        exit_sequence()
-        break  # Exit the loop after the exit sequence is completed
-    
-    elif command.lower() == "fuck":
-            type_writer("what's fuck huh?", Fore.GREEN)
-            
-    elif command.lower() == "fuck you":
-            type_writer("fuck you bitch.., you mother fucker..! 🖕🏻", Fore.GREEN)
-
-    elif command.lower() == "help":
-        box_width = 50
-        help_text = "net speed, spidy lens, say it, exit, help,"
-        padding = (box_width - len(help_text) - 2) // 2
-        
-        help_box = (
-            f"{Fore.MAGENTA}┌─ Available Commands 🕷️ ─{'─' * (box_width - 23)}\n"
-            f"{Fore.YELLOW}│\n"
-            f"{Fore.YELLOW}│ {' ' * padding}{help_text}{' ' * (box_width - len(help_text) - 2 - padding)}\n"
-            f"{Fore.MAGENTA}└{'─' * (box_width - 1)}\n"
-        )
-        
-        sys.stdout.write("\r\n")
-        sys.stdout.flush()
-        
-        for line in help_box.split('\n'):
-            type_writer(line, color='', delay=0.01)
-        
-
-    else:
-        # Randomly change the color for an "Invalid Command"
-        invalid_colors = [Fore.RED, Fore.YELLOW, Fore.MAGENTA, Fore.LIGHTCYAN_EX]
-        type_writer(f"Invalid Command... Try Again ", random.choice(invalid_colors))
+except KeyboardInterrupt:
+    now = datetime.now().strftime("%H:%M:%S")
+    type_writer(f"\n🕷️ [{now}] SYSTEM INTERRUPTED: User pressed Ctrl + C. Exiting SPIDYNAL safely...", Fore.RED)
+    exit_sequence()
+    sys.exit(0)
