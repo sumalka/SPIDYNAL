@@ -33,4 +33,7 @@ If you're interested, open an issue or contact us directly on [GitHub](https://g
 <a href="mailto:mohamedmaizanmunas@outlook.com"><img src="https://img.shields.io/badge/Gmail-Contact%20Us-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"></a>
 
 ------
+## License
+
+This project is licensed under the [GNU General Public License v3.0](./LICENSE).
 
