@@ -6,7 +6,7 @@ This section outlines the versions of **SPIDYNAL SYSTEM™** that are currently 
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.3.x   | :white_check_mark: |
+| 1.3.2   | :white_check_mark: |
 | 1.2.x   | :x:                |
 | 1.1.x   | :white_check_mark: |
 | < 1.1   | :x:                |
