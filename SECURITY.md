@@ -4,12 +4,10 @@
 
 This section outlines the versions of **SPIDYNAL SYSTEM™** that are currently being supported with security updates.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.3.2   | :white_check_mark: |
-| 1.2.x   | :x:                |
-| 1.1.x   | :white_check_mark: |
-| < 1.1   | :x:                |
+| Version   | Supported          |
+| -------   | ------------------ |
+| 1.3.0.6   | :white_check_mark: |
+| 1.3.0.4   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
