@@ -1,6 +1,6 @@
 [Setup]
-AppName=SPIDYNAL SYSTEM™
-AppVersion=1.3.0.6
+AppName=SPIDYNAL SYSTEM
+AppVersion=1.3.0.7
 DefaultDirName={pf}\SPIDYNAL
 DefaultGroupName=SPIDYNAL
 UninstallDisplayIcon={app}\SPIDYNAL.exe
@@ -9,17 +9,20 @@ Compression=lzma
 SolidCompression=yes
 
 [Files]
-Source: "G:\GitHubRep\SPIDYNAL\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs
+Source: "G:\SPIDYNAL\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs
+
+[Tasks]
+Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional Options:"
+Name: "startmenuicon"; Description: "Pin to Start Menu"; GroupDescription: "Additional Options:"
+
 
 [Icons]
 Name: "{group}\SPIDYNAL"; Filename: "{app}\SPIDYNAL.exe"
 Name: "{commondesktop}\SPIDYNAL"; Filename: "{app}\SPIDYNAL.exe"; Tasks: desktopicon
 Name: "{userprograms}\SPIDYNAL"; Filename: "{app}\SPIDYNAL.exe"; Tasks: startmenuicon
 
-[Tasks]
-Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
-Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional Options:"
-Name: "startmenuicon"; Description: "Pin to &Start Menu"; GroupDescription: "Additional Options:"
-
 [Run]
-Filename: "{app}\SPIDYNAL.exe"; Description: "Launch SPIDYNAL SYSTEM™"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\SPIDYNAL.exe"; Description: "Launch SPIDYNAL SYSTEM"; Flags: nowait postinstall skipifsilent
+
+[UninstallDelete]
+Type: files; Name: "{app}\build\spidy\mound\assets\middle.mp3"
