@@ -14,6 +14,12 @@ Source: "G:\GitHubRep\SPIDYNAL\*"; DestDir: "{app}"; Flags: recursesubdirs creat
 [Icons]
 Name: "{group}\SPIDYNAL"; Filename: "{app}\SPIDYNAL.exe"
 Name: "{commondesktop}\SPIDYNAL"; Filename: "{app}\SPIDYNAL.exe"; Tasks: desktopicon
+Name: "{userprograms}\SPIDYNAL"; Filename: "{app}\SPIDYNAL.exe"; Tasks: startmenuicon
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
+Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional Options:"
+Name: "startmenuicon"; Description: "Pin to &Start Menu"; GroupDescription: "Additional Options:"
+
+[Run]
+Filename: "{app}\SPIDYNAL.exe"; Description: "Launch SPIDYNAL SYSTEM™"; Flags: nowait postinstall skipifsilent
