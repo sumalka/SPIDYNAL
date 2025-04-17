@@ -16,8 +16,8 @@ SPIDYNAL SYSTEM™ is an advanced file search and system testing tool designed t
 3. Run the SPIDYNAL-Installer.exe
 
 ## How to Use
-1. Open Installtion folder.
-2. Run the **SPIDYNAL.EXE** application.
+1. Go to the Installtion folder.
+2. Open the **SPIDYNAL.EXE** application.
 3. Type `Help` to view the available public features.
 4. Type `Exit` to close the program.
 
