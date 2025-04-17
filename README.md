@@ -12,13 +12,14 @@ SPIDYNAL SYSTEM™ is an advanced file search and system testing tool designed t
 
 ## Installation
 1. Go to the [SPIDYNAL](https://maiz-an.github.io/SPIDYNAL/) page.
-2. Click the Download button.</li>
-3. Extract the downloaded folder to your desired location.
+2. Click the Download button.
+3. Run the SPIDYNAL-Installer.exe
 
 ## How to Use
-1. Run the application by executing **SPIDYNAL.EXE**.
-2. Type `Help` to view the available public features.
-3. Type `Exit` to close the program.
+1. Open Installtion folder.
+2. Run the **SPIDYNAL.EXE** application.
+3. Type `Help` to view the available public features.
+4. Type `Exit` to close the program.
 
 ## Contribute to SPIDYNAL SYSTEM™
 We are looking for talented **Python Developers** to contribute and help improve **SPIDYNAL SYSTEM™**. If you're passionate about coding, enjoy working on innovative projects, and want to shape the future of this intelligent search system, join us!
