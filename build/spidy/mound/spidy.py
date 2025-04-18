@@ -11,6 +11,7 @@ from colorama import Fore
 from queue import Queue
 from threading import Lock
 from datetime import datetime
+import contextlib
 
 os.system("title SPIDYNAL")
 
@@ -254,10 +255,14 @@ def type_writer(text, color=Fore.GREEN, delay=0.02, end_line=True):
 
 # Function to play sound
 def play_sound(sound):
+    if not os.path.exists(sound):
+        return
     try:
-        pygame.mixer.music.load(sound)
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy():  # Wait for the sound to finish
+        with open(os.devnull, 'w') as devnull:
+            with contextlib.redirect_stdout(devnull):  # Suppress stdout
+                pygame.mixer.music.load(sound)
+                pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
             time.sleep(1)
     except Exception as e:
         print(f"Error playing sound: {e}")
@@ -475,16 +480,7 @@ def play_start_sound():
     play_sound(start)
 
 # Run both the ASCII art and sound concurrently
-thread1 = threading.Thread(target=print_ascii_art)
-thread2 = threading.Thread(target=play_start_sound)
-
-# Start both threads
-thread1.start()
-thread2.start()
-
-# Wait for both threads to finish
-thread1.join()
-thread2.join()
+print_ascii_art()  # Only show the art, no sound
 
 time.sleep(1)  # Add a small delay after both actions have completed
 
@@ -494,29 +490,24 @@ def play_middle_sound():
     play_sound(wake_up_spidy)
 
 # Run both the sound and type_writer concurrently
-thread1 = threading.Thread(target=play_middle_sound)
-thread2 = threading.Thread(target=type_writer, args=("SPIDYNAL SYSTEM ONLINE 🕸️", Fore.CYAN))
+type_writer("SPIDYNAL SYSTEM ONLINE 🕸️", Fore.CYAN)
 
-# Start both threads
-thread1.start()
-thread2.start()
 
-# Wait for both threads to finish
-thread1.join()
-thread2.join()
+time.sleep(1)
+# Just run the typewriter effect without any sound
+type_writer("Connecting to ~SPIDY Private Server...", Fore.MAGENTA)
 
-time.sleep(2)
 # Function to play the sound for middle
-def play_middle_sound():
-    play_sound(middle)
+# def play_middle_sound():
+#     play_sound(middle)
 
-# Run both the sound and type_writer concurrently
-thread1 = threading.Thread(target=play_middle_sound)
-thread2 = threading.Thread(target=type_writer, args=("Connecting to ~SPIDY Private Server...", Fore.MAGENTA))
-thread1.start()
-thread2.start()
-thread1.join()
-thread2.join()
+# # Run both the sound and type_writer concurrently
+# thread1 = threading.Thread(target=play_middle_sound)
+# thread2 = threading.Thread(target=type_writer, args=("Connecting to ~SPIDY Private Server...", Fore.MAGENTA))
+# thread1.start()
+# thread2.start()
+# thread1.join()
+# thread2.join()
 
 # time.sleep(2)  # Wait 2 seconds before testing network speed
 
@@ -663,7 +654,7 @@ try:
         else:
             # Randomly change the color for an "Invalid Command"
             invalid_colors = [Fore.RED, Fore.YELLOW, Fore.MAGENTA, Fore.LIGHTCYAN_EX]
-            type_writer(f"Invalid Command... Try Again ", random.choice(invalid_colors))
+            type_writer(f" Invalid Command... Try Again ", random.choice(invalid_colors))
 
 
 except KeyboardInterrupt:
