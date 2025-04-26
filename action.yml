@@ -1,5 +1,5 @@
-name: "Spidynal Action"
-description: "Run SPIDYNAL, a Spider-Man-themed utility for network speed testing and file searching, in your GitHub workflow."
+name: "SPIDYNAL SYSTEM"
+description: "Your Private System Analyst & Diagnostics Tool."
 author: "maiz-an"
 
 inputs:
@@ -20,8 +20,19 @@ runs:
     - name: Run SPIDYNAL.exe
       shell: cmd
       run: |
-        SPIDYNAL.exe ${{ inputs.command }} ${{ inputs.query }} ${{ inputs.extension }}
+        echo Running SPIDYNAL SYSTEM...
+        if not "%~2"=="" (
+          set QUERY=%~2
+        ) else (
+          set QUERY=""
+        )
+        if not "%~3"=="" (
+          set EXTENSION=%~3
+        ) else (
+          set EXTENSION=""
+        )
+        SPIDYNAL.exe "${{ inputs.command }}" "%QUERY%" "%EXTENSION%"
 
 branding:
-  icon: "code"
+  icon: "terminal"
   color: "red"
