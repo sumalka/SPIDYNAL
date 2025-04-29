@@ -12,8 +12,9 @@ SPIDYNAL SYSTEM™ is an advanced System Analyst & Diagnostics Tool designed to 
 
 ## Installation
 1. Go to the [SPIDYNAL](https://spidynal.vercel.app) page.
-2. Click the Download button.
-3. Run the SPIDYNAL-Installer.exe
+2. Select the latest version.
+3. Click the Download button.
+4. Run the SPIDYNAL-Installer.exe
 
 ## How to Use
 1. Go to the Installtion folder.
