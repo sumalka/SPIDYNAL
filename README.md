@@ -11,7 +11,7 @@ SPIDYNAL SYSTEM™ is an advanced System Analyst & Diagnostics Tool designed to 
 - (Under Construction)
 
 ## Installation
-1. Go to the [SPIDYNAL](https://maiz-an.github.io/gh-pages-spidynal/) page.
+1. Go to the [SPIDYNAL](https://spidynal.vercel.app) page.
 2. Click the Download button.
 3. Run the SPIDYNAL-Installer.exe
 
