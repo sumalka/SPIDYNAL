@@ -1,3 +1,4 @@
+# top-level: only first-class keys
 github:          maiz-an
 patreon:         Maizan
 open_collective: maizan
@@ -6,5 +7,3 @@ buymeacoffee:    maizan
 custom:
   - name: "Ko-fi"
     url:  "https://ko-fi.com/maizan"
-  - name: "Buy Me A Coffee"
-    url:  "https://buymeacoffee.com/maizan"
