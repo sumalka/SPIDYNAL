@@ -1,9 +1,6 @@
-# top-level: only first-class keys
-github:          maiz-an
-patreon:         Maizan
-open_collective: maizan
-buymeacoffee:    maizan
-
-custom:
-  - name: "Ko-fi"
-    url:  "https://ko-fi.com/maizan"
+# .github/FUNDING.yml
+github:            maiz-an
+patreon:           Maizan
+open_collective:   maizan
+ko_fi:             maizan
+buy_me_a_coffee:   maizan
